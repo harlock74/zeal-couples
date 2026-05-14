@@ -20,5 +20,5 @@ It runs at **640×480 @8bpp**
 - Splash: `ENTER` (or SNES `START`) starts the game
 - `UP` `DOWN` `LEFT` `RIGHT` (or SNES D-pad): move selected card across the 9x4 grid
 - `SPACE` (or SNES `B`): reveal selected card
-- `P` on keyboard (or SNES `Y`/`X`): pause/resume gameplay music track
+- `P` on keyboard : pause/resume gameplay music track
 - `RIGHT_SHIFT` (or SNES `SELECT`): quit
