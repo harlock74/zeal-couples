@@ -43,7 +43,6 @@ add_executable(${target_name}
     src/assets.c
     src/audio.c
     src/splash.c
-    src/rewards.c
 )
 
 # prevent linking against stdlib
