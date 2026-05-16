@@ -6,6 +6,12 @@ zeal-couples is a memory-style game for the Zeal 8-bit Computer.
 
 It runs at **640×480 @8bpp**
 
+## Screenshots
+
+| Splash Screen  | Gameplay |
+| - | - |
+| ![image](https://github.com/harlock74/zeal-couples/blob/main/docs/screenshots/1.png) | ![image](https://github.com/harlock74/zeal-couples/blob/main/docs/screenshots/2.png) |
+
 ## Rules
 
 - Deck size: **36 cards**
