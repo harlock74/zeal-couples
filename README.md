@@ -17,8 +17,27 @@ It runs at **640×480 @8bpp**
 
 ## Controls
 
+- SNES mouse support enabled. 
 - Splash: `ENTER` (or SNES `START`) starts the game
-- `UP` `DOWN` `LEFT` `RIGHT` (or SNES D-pad): move selected card across the 9x4 grid
-- `SPACE` (or SNES `B`): reveal selected card
-- `P` on keyboard : pause/resume gameplay music track
+- `UP` `DOWN` `LEFT` `RIGHT` (or SNES D-pad): move the single hand marker across available card slots, skipping removed cards
+- `SPACE`/`Z` (or SNES `B`) or mouse left click: reveal selected card
+- `S` on keyboard (or SNES `X`): mute/resume gameplay music while playing
 - `RIGHT_SHIFT` (or SNES `SELECT`): quit
+- End states: `ENTER`/`SPACE` or mouse left click returns to splash for a fresh game
+
+
+## Assets
+
+The main larger cards were made by me. Feel free to create your own cards by editing the provided `cards.aseprite`. All you need to do is change the tiles used for each suit pip. You can also be creative with the Jack, Queen, and King tiles. Have fun if you find my cards boring at some point.
+
+## Attribution
+
+Author: Zingot Games  
+License: CC-BY 4.0  
+https://opengameart.org/content/bitmap-font-pack  
+A few changes to the original assets have been made including the color palette.
+
+Author: (Pixel) Poker Cards  
+License: CC-BY 4.0  
+https://ivoryred.itch.io/pixel-poker-cards  
+A few changes to the original assets have been made including the color palette.
