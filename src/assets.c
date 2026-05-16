@@ -128,7 +128,6 @@ static const uint8_t kBackCardTiles[CARD_TILE_H][CARD_TILE_W] = {
     {61, 62, 63},
 };
 
-static const uint8_t kMoneyBackHighlightTile = HIGHLIGHT_CARD_TILE_ID;
 static const uint8_t kRemovedBackgroundTile = REMOVED_CARD_BACKGROUND_TILE_ID;
 
 /* Stream a palette file into VRAM palette memory in chunks. */
@@ -335,16 +334,6 @@ void assets_build_back_tile_grid(uint8_t grid[4][3])
     for (uint8_t row = 0; row < CARD_TILE_H; row++) {
         for (uint8_t col = 0; col < CARD_TILE_W; col++) {
             grid[row][col] = kBackCardTiles[row][col];
-        }
-    }
-}
-
-/* Build the "bag of money" selector block. */
-void assets_build_money_back_tile_grid(uint8_t grid[4][3])
-{
-    for (uint8_t row = 0; row < CARD_TILE_H; row++) {
-        for (uint8_t col = 0; col < CARD_TILE_W; col++) {
-            grid[row][col] = kMoneyBackHighlightTile;
         }
     }
 }

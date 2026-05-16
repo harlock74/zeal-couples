@@ -16,6 +16,11 @@ typedef struct {
     uint8_t space;
     uint8_t toggle_music;
     uint8_t quit;
+    uint8_t mouse_present;
+    int8_t mouse_dx;
+    int8_t mouse_dy;
+    uint8_t mouse_left;
+    uint8_t mouse_right;
 } KeyEvents;
 
 /* Initialize ZGDK input and prime internal edge-tracking state. */

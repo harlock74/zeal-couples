@@ -12,10 +12,10 @@
 /*
  * Rendering model:
  * - TILEMAP_LAYER (0): base board and card visuals (back/face/removed-green)
- * - CARD_LAYER/UI_LAYER (1): persistent TMX overlay + moving selector overlay
+ * - CARD_LAYER/UI_LAYER (1): persistent TMX overlay + hand selector marker
  *
- * Selector rendering is always temporary. We restore layer-1 tiles from TMX data
- * whenever selector moves away from a slot.
+ * Selector rendering is temporary. We restore layer-1 tiles from TMX data
+ * whenever the hand marker moves away from a slot.
  */
 
 static uint8_t slot_x(uint8_t slot)
@@ -30,13 +30,22 @@ static uint8_t slot_y(uint8_t slot)
     return (uint8_t)(1U + ((slot / CARD_COLS) * 6U));
 }
 
+static uint16_t sprite_coord(uint16_t pixel)
+{
+    /*
+     * ZVB sprite coordinates are biased by 16; pixel 0 is displayed by writing
+     * coordinate 16.
+     */
+    return (uint16_t)(pixel + 16U);
+}
+
 static void place_tile_grid_at_layer(
     uint8_t x0,
     uint8_t y0,
     uint8_t layer,
     const uint8_t grid[SRC_CARD_H][SRC_CARD_W])
 {
-    /* Generic helper used by both card art and selector overlays. */
+    /* Generic helper used by card art and removed-slot fills. */
     for (uint8_t row = 0; row < SRC_CARD_H; row++) {
         for (uint8_t col = 0; col < SRC_CARD_W; col++) {
             gfx_tilemap_place(&vctx, grid[row][col], layer, (uint8_t)(x0 + col), (uint8_t)(y0 + row));
@@ -131,7 +140,7 @@ void render_cards(void)
     /*
      * Pass 1:
      * - draw each slot state on layer 0
-     * - restore layer-1 background under selector footprint for every slot
+     * - restore layer-1 background under the old selector footprint for every slot
      */
     for (uint8_t i = 0; i < CARD_COUNT; i++) {
         if (cards[i].removed) {
@@ -144,24 +153,54 @@ void render_cards(void)
 
         /* Base card/removed visuals live on layer 0. */
         place_tile_grid_at_layer(slot_x(i), slot_y(i), TILEMAP_LAYER, scratch_tile_grid);
-        /* Selector overlay layer is cleared per slot before re-drawing selection. */
+        /* Selector layer is cleared per slot before re-drawing the hand marker. */
         clear_selector_overlay_slot(i);
     }
 
     /*
      * Pass 2:
-     * Selection overlay lives on layer 1 only for selectable-hidden visuals:
-     * - hidden card slots
-     * - removed slots (as requested for navigation visibility)
-     * Revealed face cards must not receive the overlay.
+     * Keyboard/SNES selection is a single opened-hand tile on layer 1, placed on
+     * the middle tile of the selected card's top row. Mouse mode uses the sprite
+     * cursor instead, so the tile marker is hidden while mouse control is active.
      */
-    if (selected_slot < CARD_COUNT &&
-        (cards[selected_slot].removed || !cards[selected_slot].revealed))
+    if (state == STATE_PLAYING &&
+        hand_selector_visible &&
+        selected_slot < CARD_COUNT &&
+        !cards[selected_slot].removed &&
+        !cards[selected_slot].revealed)
     {
-        assets_build_money_back_tile_grid(scratch_tile_grid);
-        place_tile_grid_at_layer(slot_x(selected_slot), slot_y(selected_slot), CARD_LAYER, scratch_tile_grid);
+        gfx_tilemap_place(
+            &vctx,
+            HAND_SELECTOR_TILE_ID,
+            CARD_LAYER,
+            (uint8_t)(slot_x(selected_slot) + 1U),
+            slot_y(selected_slot));
     }
 
     draw_bottom_banner();
     draw_reveals_counter();
+}
+
+void render_mouse_cursor_init(void)
+{
+    gfx_sprite cursor = {
+        .y = 0,
+        .x = 0,
+        .tile = OPEN_HAND_CURSOR_TILE_ID,
+        .flags = SPRITE_NONE,
+        .options = SPRITE_OPTION_NONE,
+    };
+
+    gfx_sprite_render(&vctx, MOUSE_CURSOR_SPRITE_INDEX, &cursor);
+}
+
+void render_mouse_cursor_show(uint16_t pixel_x, uint16_t pixel_y)
+{
+    gfx_sprite_set_x(&vctx, MOUSE_CURSOR_SPRITE_INDEX, sprite_coord(pixel_x));
+    gfx_sprite_set_y(&vctx, MOUSE_CURSOR_SPRITE_INDEX, sprite_coord(pixel_y));
+}
+
+void render_mouse_cursor_hide(void)
+{
+    gfx_sprite_set_y(&vctx, MOUSE_CURSOR_SPRITE_INDEX, 0);
 }

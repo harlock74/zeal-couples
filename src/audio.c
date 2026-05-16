@@ -35,7 +35,7 @@ static track_t music_track = {
 
 /* Runtime music flags:
  * - music_playing: current tracker tick should advance
- * - game_music_paused: user toggle for gameplay track only (P key)
+ * - game_music_paused: gameplay-only user mute toggle (S / SNES X)
  */
 static uint8_t music_playing = 0;
 static uint8_t game_music_paused = 0;
@@ -114,7 +114,7 @@ void audio_toggle_game_audio_mode(void)
 
     if (game_music_paused) {
         /*
-         * Pause request:
+         * Mute request:
          * - silence channels now
          * - keep track data loaded to allow resume without reload
          */

@@ -6,7 +6,7 @@
 void audio_init(void);
 void audio_deinit(void);
 
-/* Toggle pause/resume for gameplay music only. */
+/* Toggle mute/resume for gameplay music only. */
 void audio_toggle_game_audio_mode(void);
 
 /* Music lifecycle hooks. */

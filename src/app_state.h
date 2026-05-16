@@ -15,6 +15,7 @@ extern uint8_t deck_pos;
 extern GameState state;
 extern uint16_t entropy;
 extern uint8_t selected_slot;
+extern uint8_t hand_selector_visible;
 extern uint8_t reveals_remaining;
 
 /* Bottom status banner text rendered by render.c. */

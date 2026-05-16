@@ -8,6 +8,8 @@
 
 #define SCREEN_TILE_W 40
 #define SCREEN_TILE_H 30
+#define SCREEN_PIXEL_W 640
+#define SCREEN_PIXEL_H 480
 
 /* Board dimensions: 9 columns x 4 rows = 36 slots/cards. */
 #define CARD_COLS 9
@@ -31,12 +33,10 @@
 #define REVEALS_COUNTER_Y 26
 #define REVEALS_DIGIT_TILE_ZERO 115
 
-/*
- * Highlight tile used for the selected hidden card.
- * This value matches the tile ID you chose in Tiled.
- * Change this constant to switch highlight style.
- */
-#define HIGHLIGHT_CARD_TILE_ID 79
+#define OPEN_HAND_CURSOR_TILE_ID 125
+/* Keyboard/SNES uses the same opened-hand art as the SNES mouse cursor. */
+#define HAND_SELECTOR_TILE_ID OPEN_HAND_CURSOR_TILE_ID
+#define MOUSE_CURSOR_SPRITE_INDEX 0
 
 /*
  * Tile used to fill removed-card slots (3x4 green background block).

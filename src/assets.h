@@ -16,7 +16,6 @@ gfx_error load_cards_tileset(gfx_context* ctx);
 /* Build 3x4 tile blocks for each visual card state. */
 void assets_build_card_tile_grid(uint8_t grid[4][3], uint8_t card);
 void assets_build_back_tile_grid(uint8_t grid[4][3]);
-void assets_build_money_back_tile_grid(uint8_t grid[4][3]);
 void assets_build_removed_tile_grid(uint8_t grid[4][3]);
 
 /* Read static table tiles from TMX base/overlay layers. */
