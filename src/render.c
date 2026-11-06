@@ -82,7 +82,7 @@ static void draw_bottom_banner(void)
      * Keep x=2..11 reserved for layer-1 "REVEALS:NN".
      * Clear/draw message only on x=13..37 (25 tiles).
      */
-    nprint_string(&vctx, kClearRow, 25, 13, 26);
+    hud_tilemap_nput_s(&vctx, kClearRow, 25, 13, 26);
 
     if (banner_text[0] == '\0') {
         return;
@@ -93,7 +93,7 @@ static void draw_bottom_banner(void)
         len = 25U;
     }
     x = (uint8_t)(13U + ((25U - len) / 2U));
-    nprint_string(&vctx, banner_text, len, x, 26);
+    hud_tilemap_nput_s(&vctx, banner_text, len, x, 26);
 }
 
 static uint8_t reveals_digit_tile(uint8_t digit)

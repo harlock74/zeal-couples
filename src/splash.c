@@ -41,11 +41,11 @@ static void draw_splash_prompt(uint8_t visible)
     const uint8_t x = (uint8_t)((SCREEN_TILE_W - len) / 2U);
 
     if (visible) {
-        nprint_string(&vctx, kSplashPromptText, len, x, SPLASH_PROMPT_Y);
+        hud_tilemap_nput_s(&vctx, kSplashPromptText, len, x, SPLASH_PROMPT_Y);
         return;
     }
 
-    nprint_string(&vctx, kSplashPromptBlank, len, x, SPLASH_PROMPT_Y);
+    hud_tilemap_nput_s(&vctx, kSplashPromptBlank, len, x, SPLASH_PROMPT_Y);
 }
 
 void splash_run_blocking(void)
