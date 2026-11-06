@@ -23,13 +23,15 @@ It runs at **640×480 @8bpp**
 
 ## Controls
 
-- SNES mouse support enabled. 
+- SNES mouse support enabled
 - Splash: `ENTER` (or SNES `START`) starts the game
 - `UP` `DOWN` `LEFT` `RIGHT` (or SNES D-pad): move the single hand marker across available card slots, skipping removed cards
 - `SPACE`/`Z` (or SNES `B`) or mouse left click: reveal selected card
 - `S` on keyboard (or SNES `X`): mute/resume gameplay music while playing
 - `RIGHT_SHIFT` (or SNES `SELECT`): quit
 - End states: `ENTER`/`SPACE` or mouse left click returns to splash for a fresh game
+
+If using the native-emulator and not real hardware, click on the mouse middle button to hide the host mouse cursor.
 
 
 ## Assets
